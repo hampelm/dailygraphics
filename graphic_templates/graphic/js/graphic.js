@@ -36,6 +36,12 @@ var render = function(containerWidth) {
     //     data: []
     // });
 
+    if (pymChild) {
+        pymChild.onMessage('on-screen', function(bucket) {
+            ANALYTICS.trackEvent('on-screen', bucket.bucket);
+        });
+    }
+
     // Update iframe
     if (pymChild) {
         pymChild.sendHeight();
