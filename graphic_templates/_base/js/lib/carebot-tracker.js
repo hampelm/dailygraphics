@@ -6,7 +6,7 @@
 */
 
 /*globals define, attachEvent, addEventListener: true */
-/* global module */
+/* global module, console */
 
 (function(factory) {
     if (typeof define === 'function' && define.amd) {
@@ -138,6 +138,8 @@
             var bottomIsOffScreen = rect.bottom > vHeight;
             var topIsOffScreen = rect.top < 0;
 
+            console.log("Element and window information", rect, vWidth, vHeight);
+
             // These are not necessary, but kept if we want to track partial visibility.
             /*
             var leftSideIsToRightOfWindow = rect.left > vWidth;
@@ -158,6 +160,7 @@
 
         function checkIfVisible () {
             var newVisibility = isElementInViewport(el);
+            console.log("Is visible?", newVisibility);
 
             if (isVisible && !newVisibility) {
                 timer.pause();
