@@ -195,16 +195,15 @@
             context: '{{ slug }}',
             paths: {
                 'pym': 'http://apps.npr.org/dailygraphics/graphics/{{ slug }}/js/lib/pym',
-                'CarebotTracker': 'http://apps.npr.org/dailygraphics/graphics/{{ slug }}/js/lib/carebot-tracker'
+                'CarebotTracker': '//apps.npr.org/dailygraphics/graphics/{{ slug }}/js/lib/carebot-tracker'
             },
             shim: {
-                'pym': { exports: 'pym' },
-                'CarebotTracker': { exports: 'CarebotTracker' }
+                'pym': { exports: 'pym' }
             }
         });
 
         // Load pym into locale namespace
-        require_{{ var_name }}(['require', 'pym'], function (require, Pym) {
+        require_{{ var_name }}(['require', 'pym', 'CarebotTracker'], function (require, Pym, CarebotTracker) {
             // Create pym parent
             var pymParent = new Pym.Parent(
                 'responsive-embed-{{ slug }}',
