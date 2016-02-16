@@ -1,4 +1,4 @@
-/*! carebot-tracker - v0.1.0 - 2016-02-11 */
+/*! carebot-tracker - v0.1.1 - 2016-02-16 */
 /*
 * carebot-tracker.js is library that checks if an element is visible on the page
 * and reports it to pym.js.
@@ -127,31 +127,29 @@
         function isElementInViewport(el) {
             // Adapted from http://stackoverflow.com/a/15203639/117014
             //
-            // Returns true only if the WHOLE element is in the viewport
+            // Returns true if any part of the element is in the viewport
             var rect     = el.getBoundingClientRect();
             var vWidth   = window.innerWidth || document.documentElement.clientWidth;
             var vHeight  = window.innerHeight || document.documentElement.clientHeight;
 
             // Core tests: are all sides of the rectangle in the viewport?
-            var leftIsOffScreen = rect.left < 0;
-            var rightIsOffScreen = rect.right > vWidth;
-            var bottomIsOffScreen = rect.bottom > vHeight;
-            var topIsOffScreen = rect.top < 0;
+            // var leftIsOffScreen = rect.left < 0;
+            // var rightIsOffScreen = rect.right > vWidth;
+            // var bottomIsOffScreen = rect.bottom > vHeight;
+            // var topIsOffScreen = rect.top < 0;
 
-            console.log("Element and window information", rect, vWidth, vHeight);
+            // console.log("Element and window information", rect.top, rect.right, rect.bottom, rect.left, vWidth, vHeight);
 
             // These are not necessary, but kept if we want to track partial visibility.
-            /*
             var leftSideIsToRightOfWindow = rect.left > vWidth;
             var rightSideIsToLeftOfWindow = rect.right < 0;
             var topIsBelowVisibleWindow = rect.top > vHeight;
             var botomIsAboveVisibleWindow = rect.bottom < 0;
-            */
 
-            if (leftIsOffScreen  ||
-                rightIsOffScreen ||
-                topIsOffScreen   ||
-                bottomIsOffScreen) {
+            if (leftSideIsToRightOfWindow  ||
+                rightSideIsToLeftOfWindow  ||
+                topIsBelowVisibleWindow    ||
+                botomIsAboveVisibleWindow) {
                 return false;
             }
 
@@ -160,7 +158,6 @@
 
         function checkIfVisible () {
             var newVisibility = isElementInViewport(el);
-            console.log("Is visible?", newVisibility);
 
             if (isVisible && !newVisibility) {
                 timer.pause();

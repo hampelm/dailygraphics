@@ -16,7 +16,6 @@ var onWindowLoaded = function() {
 
     pymChild.onMessage('on-screen', function(bucket) {
         console.log("child:onmessage: time bucket", bucket);
-        console.log("ANALYTICS", ANALYTICS);
         ANALYTICS.trackEvent('on-screen', bucket);
     });
 }
@@ -37,11 +36,11 @@ var render = function(containerWidth) {
     }
 
     // Render the chart!
-    // renderGraphic({
-    //     container: '#graphic',
-    //     width: containerWidth,
-    //     data: []
-    // });
+    renderGraphic({
+        container: '#graphic',
+        width: containerWidth,
+        data: []
+    });
 
     // Update iframe
     if (pymChild) {
