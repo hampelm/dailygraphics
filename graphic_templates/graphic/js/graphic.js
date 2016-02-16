@@ -15,7 +15,6 @@ var onWindowLoaded = function() {
     }
 
     pymChild.onMessage('on-screen', function(bucket) {
-        console.log("child:onmessage: time bucket", bucket);
         ANALYTICS.trackEvent('on-screen', bucket);
     });
 }
@@ -24,7 +23,6 @@ var onWindowLoaded = function() {
  * Render the graphic.
  */
 var render = function(containerWidth) {
-    console.log("Graphic rendered. Child:", pymChild)
     if (!containerWidth) {
         containerWidth = DEFAULT_WIDTH;
     }

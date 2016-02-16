@@ -336,7 +336,6 @@
 
         var pymParent = new pym.Parent('preview', 'child.html', {});
         var tracker = new CarebotTracker.VisibilityTracker('preview', function(result) {
-          console.log("parent:bucket callback: The user has seen the graphic for " + result.bucket);
           pymParent.sendMessage('on-screen', result.bucket);
         });
 
