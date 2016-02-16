@@ -13,12 +13,19 @@ var onWindowLoaded = function() {
     } else {
         pymChild = new pym.Child({});
     }
+
+    pymChild.onMessage('on-screen', function(bucket) {
+        console.log("child:onmessage: time bucket", bucket);
+        console.log("ANALYTICS", ANALYTICS);
+        ANALYTICS.trackEvent('on-screen', bucket);
+    });
 }
 
 /*
  * Render the graphic.
  */
 var render = function(containerWidth) {
+    console.log("Graphic rendered. Child:", pymChild)
     if (!containerWidth) {
         containerWidth = DEFAULT_WIDTH;
     }
@@ -35,12 +42,6 @@ var render = function(containerWidth) {
     //     width: containerWidth,
     //     data: []
     // });
-
-    if (pymChild) {
-        pymChild.onMessage('on-screen', function(bucket) {
-            ANALYTICS.trackEvent('on-screen', bucket.bucket);
-        });
-    }
 
     // Update iframe
     if (pymChild) {
